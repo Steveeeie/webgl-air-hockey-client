@@ -2,7 +2,7 @@
   <div>
     <div id="three-container"></div>
     <p>{{started}}</p>
-    <p>{{playerNumber}}</p>
+    <p>Player Number: {{playerNumber}}</p>
     <p>{{assetPositions}}</p>
   </div>
 </template>
@@ -17,6 +17,7 @@ export default {
   props: ['assetPositions', 'playerNumber', 'started'],
   data() {
     return {
+      player2CameraSet: false,
       camera: null,
       scene: null,
       renderer: null,
@@ -70,6 +71,15 @@ export default {
     },
     animate: function() {
       requestAnimationFrame(this.animate)
+
+      console.log(this.cameraIsSet)
+
+      if(!this.player2CameraSet && this.playerNumber === 2){
+        this.player2CameraSet = true
+        this.camera.position.set(0, 8, -21)
+        this.camera.lookAt( new Vector3(0,-3,0) )
+      }
+
       if(this.started){
         this.puck.position.x = this.assetPositions.puck.x / 2
         this.puck.position.z = this.assetPositions.puck.y / 2
