@@ -10,7 +10,7 @@
 
 <script>
 import io from 'socket.io-client'
-import Scene from './components/Scene.vue'
+import Scene from './components/Scene'
 const serverURL = 'http://localhost:7070'
 
 export default {
