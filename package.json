@@ -1,6 +1,6 @@
 {
-  "name": "webgl-air-hockey-react",
-  "version": "0.1.0",
+  "name": "webgl-air-hockey-client",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "react": "^16.6.1",
@@ -24,7 +24,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "case-sensitive-paths-webpack-plugin": "^2.1.2"
-  }
+  "devDependencies": {}
 }

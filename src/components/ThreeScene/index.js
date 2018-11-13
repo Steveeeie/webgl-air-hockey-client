@@ -25,21 +25,21 @@ class ThreeScene extends Component {
 
         const animate = () => {
             const { started, playerNumber, assetPositions } = this.props
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animate)
             if (started) {
                 if (!cameraSet) {
                     const cameraPositionZ = playerNumber === 1 ? 21 : -21
                     cameraSet = true
-                    camera.position.set(0, 8, cameraPositionZ);
+                    camera.position.set(0, 8, cameraPositionZ)
                     camera.lookAt(new Vector3(0, -3, 0))
                 }
                 puck.position.x = assetPositions.puck.x / 2
-                puck.position.z = assetPositions.puck.y / 2;
-                paddle1.position.x = assetPositions.paddle1.x / 2;
-                paddle1.position.z = assetPositions.paddle1.y / 2;
-                paddle2.position.x = assetPositions.paddle2.x / 2;
+                puck.position.z = assetPositions.puck.y / 2
+                paddle1.position.x = assetPositions.paddle1.x / 2
+                paddle1.position.z = assetPositions.paddle1.y / 2
+                paddle2.position.x = assetPositions.paddle2.x / 2
                 paddle2.position.z = assetPositions.paddle2.y / 2
-            }else{
+            } else {
                 cameraRotation += 0.0025
                 camera.position.y = 10
                 camera.position.x = Math.sin(cameraRotation) * 20
