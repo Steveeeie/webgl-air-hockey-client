@@ -15,5 +15,10 @@ dirlight1.position.set(-13.9, 10.0, 19.24)
 dirlight2.position.set(13.9, 10.0, -19.24)
 hemLight1.position.set(0.5, 1, 0.75)
 pointlight1.position.set(0, 3.75, 0)
+pointlight1.castShadow = true
+pointlight1.shadow.mapSize.width = 512;  // default
+pointlight1.shadow.mapSize.height = 512; // default
+pointlight1.shadow.camera.near = 0.5;       // default
+pointlight1.shadow.camera.far = 500      // default
 
 export default [ambLight1, dirlight1, dirlight2, hemLight1, pointlight1]
