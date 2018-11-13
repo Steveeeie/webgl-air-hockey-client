@@ -6,6 +6,4 @@ import ny from './ny.png'
 import pz from './pz.png'
 import nz from './nz.png'
 
-const environment = new CubeTextureLoader().load( [ px, nx, py, ny, pz, nz ] );
-
-export default environment
+export default new CubeTextureLoader().load([px, nx, py, ny, pz, nz])
