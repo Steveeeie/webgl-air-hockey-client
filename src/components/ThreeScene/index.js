@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { WebGLRenderer, PerspectiveCamera, Vector3, Scene, PCFSoftShadowMap, Color, Fog } from 'three'
-import { puck, paddle1, paddle2, table, floor } from './meshes'
+import { puck, paddle1, paddle2, table } from './meshes'
 import lights from './lights'
 import Styles from './styles.module.css'
 
@@ -29,7 +29,7 @@ class ThreeScene extends Component {
         const scene = new Scene()
         scene.background = new Color(0x0e111b)
         scene.fog = new Fog(new Color(0x0e111b), 0.5, 55)
-        scene.add(puck, paddle1, paddle2, table, floor, ...lights)
+        scene.add(puck, paddle1, paddle2, table, ...lights)
 
         //Camera
         const camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)
