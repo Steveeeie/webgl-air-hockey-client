@@ -5,7 +5,6 @@ import paddleJSON from './paddle.json'
 import puckJSON from './puck.json'
 
 const GeometryLoader = new BufferGeometryLoader()
-
 const table = new Mesh(GeometryLoader.parse(tableJSON), materials.table)
 const paddle1 = new Mesh(GeometryLoader.parse(paddleJSON), materials.accessories)
 const paddle2 = new Mesh(GeometryLoader.parse(paddleJSON), materials.accessories)
