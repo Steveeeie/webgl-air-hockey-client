@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { WebGLRenderer, PerspectiveCamera, Vector3, Scene, PCFSoftShadowMap, Color, Fog } from 'three'
-import { puck, paddle1, paddle2, table } from './meshes'
+import { puck, paddle1, paddle2, table, floor } from './meshes'
 import lights from './lights'
 import Styles from './styles.module.css'
 
@@ -10,22 +10,26 @@ class ThreeScene extends Component {
     }
 
     runThreeScene() {
-
         //Renderer
         const container = document.getElementById('three-container')
         const renderer = new WebGLRenderer({ alpha: true, antialias: true })
         container.appendChild(renderer.domElement)
-        renderer.setPixelRatio(window.devicePixelRatio * 0.75)
+        renderer.setPixelRatio(window.devicePixelRatio * 2)
         renderer.setSize(container.clientWidth, container.clientHeight)
         renderer.shadowMap.enabled = true
         renderer.shadowMap.type = PCFSoftShadowMap
 
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight)
+        })
+
         //Scene
         const scene = new Scene()
-        const fogColor = new Color(0x160d21)
-        scene.background = fogColor;
-        scene.fog = new Fog(fogColor, 0.0025, 70);
-        scene.add(puck, paddle1, paddle2, table, ...lights)
+        scene.background = new Color(0x0e111b)
+        scene.fog = new Fog(new Color(0x0e111b), 0.5, 55)
+        scene.add(puck, paddle1, paddle2, table, floor, ...lights)
 
         //Camera
         const camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)

@@ -1,24 +1,29 @@
-import {
-    AmbientLight,
-    DirectionalLight,
-    HemisphereLight,
-    PointLight,
-} from 'three'
+import { AmbientLight, SpotLight, HemisphereLight, PointLight } from 'three'
 
-const ambLight1 = new AmbientLight(0x000000, 0.01)
-const dirlight1 = new DirectionalLight(0xffffff, 0.5, 40)
-const dirlight2 = new DirectionalLight(0xffffff, 0.5, 40)
-const hemLight1 = new HemisphereLight(0xeeeeff, 0x777788, 0.01)
-const pointlight1 = new PointLight(0xffffff, 0.5, 15)
-ambLight1.position.set(0, 0, 0)
-dirlight1.position.set(-13.9, 10.0, 19.24)
-dirlight2.position.set(13.9, 10.0, -19.24)
+const ambLight = new AmbientLight(0xffb783, 0.2)
+const hemLight1 = new HemisphereLight(0xffffff, 0x777788, 0.3)
+const pointlight1 = new PointLight(0xffffff, 0.6)
+const spotLight1 = new SpotLight(0xbd5467, 0.2)
+const spotLight2 = new SpotLight(0x3c7fff, 0.2)
+ambLight.position.set(0, 0, 0)
 hemLight1.position.set(0.5, 1, 0.75)
 pointlight1.position.set(0, 3.75, 0)
 pointlight1.castShadow = true
-pointlight1.shadow.mapSize.width = 512;  // default
-pointlight1.shadow.mapSize.height = 512; // default
-pointlight1.shadow.camera.near = 0.5;       // default
-pointlight1.shadow.camera.far = 500      // default
+pointlight1.shadow.mapSize.width = 1024
+pointlight1.shadow.mapSize.height = 1024
+pointlight1.shadow.camera.near = 0.5
+pointlight1.shadow.camera.far = 100
+spotLight1.position.set(20, 20, 20)
+spotLight1.castShadow = true
+spotLight1.shadow.mapSize.width = 1024
+spotLight1.shadow.mapSize.height = 1024
+spotLight1.shadow.camera.near = 0.5
+spotLight1.shadow.camera.far = 100
+spotLight2.position.set(-20, 20, -20)
+spotLight2.castShadow = true
+spotLight2.shadow.mapSize.width = 1024
+spotLight2.shadow.mapSize.height = 1024
+spotLight2.shadow.camera.near = 0.5
+spotLight2.shadow.camera.far = 100
 
-export default [ambLight1, dirlight1, dirlight2, hemLight1, pointlight1]
+export default [ambLight, hemLight1, pointlight1, spotLight1, spotLight2]
