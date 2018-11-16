@@ -1,4 +1,4 @@
-import { TextureLoader, MeshStandardMaterial} from 'three'
+import { TextureLoader, MeshStandardMaterial } from 'three'
 import environment from '../../environment'
 import albedoFile from './table_albedo.jpg'
 import metalnessFile from './table_metalness.jpg'
@@ -18,7 +18,7 @@ const table = new MeshStandardMaterial({
     metalnessMap: metalnessMap,
     normalMap: normalMap,
     roughness: 1,
-    roughnessMap: roughnessMap
+    roughnessMap: roughnessMap,
 })
 
 export default table
