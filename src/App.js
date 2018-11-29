@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import io from 'socket.io-client'
+import { CLIENT_URL, SERVER_URL } from './constants'
 import ThreeScene from './components/ThreeScene'
 import './App.css'
-
-const serverURL = 'http://localhost:7070'
 
 class App extends Component {
     state = {
@@ -18,6 +17,14 @@ class App extends Component {
         assetPositions: null,
         movementX: null,
         movementY: null,
+        gameURL: null,
+        gameURLShown: false
+
+    }
+
+    componentWillMount() {
+        const gameid =  window.location.pathname.split('/')[1]
+        if(gameid) this.handleJoinGame(gameid)
     }
 
     showReadyUpButton() {
@@ -30,31 +37,25 @@ class App extends Component {
     }
 
     handleCreateGame() {
-        fetch(`${serverURL}/create-game`)
-            .then(res => {
-                return res.json()
-            })
-            .then(json => {
+        fetch(`${SERVER_URL}/create-game`)
+            .then(res => res.json())
+            .then(({ gameID }) => {
                 this.setState({
                     createButtonShown: false,
-                    joinButtonShown: false,
-                    joinInputValue: json.gameID,
+                    gameURL: `${CLIENT_URL}/${gameID}`,
+                    gameURLShown: true
                 })
-                this.bindSocketEvents(json.gameID)
+                this.bindSocketEvents(gameID)
             })
     }
 
-    handleJoinGame() {
-        this.setState({
-            createButtonShown: false,
-            joinButtonShown: false,
-            joinInputShown: false,
-        })
-        this.bindSocketEvents(this.state.joinInputValue)
+    handleJoinGame(gameid) {
+        this.setState({ createButtonShown: false })
+        this.bindSocketEvents(gameid)
     }
 
     bindSocketEvents(gameID) {
-        const socket = io(`${serverURL}/${gameID}`)
+        const socket = io(`${SERVER_URL}/${gameID}`)
         socket.on('player-number-assigned', data => this.setState({ playerNumber: data }))
         socket.on('status-updated', data => (data === 'ready' ? this.showReadyUpButton() : this.handleStart()))
         socket.on('simulation-updated', data => this.updateMovement(data))
@@ -96,11 +97,8 @@ class App extends Component {
             <Fragment>
                 <div className="interface">
                     {this.state.createButtonShown && <button onClick={() => this.handleCreateGame()}>Create Game</button>}
-                    {this.state.joinInputShown && (
-                        <input onChange={event => this.handleJoinInputChange(event)} value={this.state.joinInputValue} type="text" />
-                    )}
-                    {this.state.joinButtonShown && <button onClick={() => this.handleJoinGame()}>Join Game</button>}
                     {this.state.readyUpButtonShown && <button onClick={() => this.handleReadyUp()}>Ready</button>}
+                    {this.state.gameURLShown && <p>{this.state.gameURL}</p>}
                 </div>
                 <ThreeScene
                     assetPositions={this.state.assetPositions}
