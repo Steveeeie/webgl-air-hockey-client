@@ -30,8 +30,7 @@ class App extends Component {
     showReadyUpButton() {
         this.setState({
             createButtonShown: false,
-            joinButtonShown: false,
-            joinInputShown: false,
+            gameURLShown: false,
             readyUpButtonShown: true,
         })
     }
