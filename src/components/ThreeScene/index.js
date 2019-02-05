@@ -14,7 +14,9 @@ class ThreeScene extends Component {
         const container = document.getElementById('three-container')
         const renderer = new WebGLRenderer({ alpha: true, antialias: true })
         container.appendChild(renderer.domElement)
-        renderer.setPixelRatio(window.devicePixelRatio * 1.5)
+        if(window.devicePixelRatio > 1){
+            renderer.setPixelRatio(window.devicePixelRatio * 0.5)
+        }
         renderer.setSize(container.clientWidth, container.clientHeight)
         renderer.shadowMap.enabled = true
         renderer.shadowMap.type = PCFSoftShadowMap
